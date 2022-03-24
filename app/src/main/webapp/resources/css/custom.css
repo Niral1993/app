@@ -1,0 +1,32 @@
+.textbox-round-corner {
+			border-radius: 30px;
+			padding: 20px; 
+			height: 50px;
+}
+.btn-round-corner {
+			border-radius: 30px;
+			height: 50px;
+			padding-top:12px;
+			text-align: center;
+}
+.loader-div {
+			display: none;
+			position: fixed;
+			margin: 0px;
+			padding: 0px;
+			right: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			background-color: #fff;
+			z-index: 30001;
+			opacity: 0.8;
+}
+.loader-img {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+}
