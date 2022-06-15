@@ -5,7 +5,7 @@
 	<head>
 		<%@ page isELIgnored="false" %>
 		
-		<!-- font css -->
+		<!-- font css --> 
 		<link href="<c:url value="/resources/app/font/all.min.css" />" rel="stylesheet">
 		
 		<!-- google font -->
@@ -52,7 +52,7 @@
 											<img src="<c:url value="/resources/img/atul.png" />" style="height: 30px;width: auto;" class="logo-img" />
 										</div>
 										<br/>
-										<div class="text-center">
+										<div class="text-center"> 
 											<h1 class="h4 text-gray-900 mb-4">App Name</h1>
 										</div>
 										<div class="form-group">
@@ -130,7 +130,7 @@
 						validationFlag = 0;		
 					});
 					
-				return false;
+				return false; 
 			}
 			
 			if(validationFlag == 1)
@@ -139,30 +139,29 @@
 				formData.append('userName', userName);
 				formData.append('password', password);
 				
+				/*$.ajax({
+					
+					type: "GET",
+					url: "${pageContext.request.contextPath}/login/getMsg",
+					success: function(data){
+						alert(data);
+					}
+				});
+				data: formData,
+				*/
+				
+				//
+				 
 				$.ajax({  
-					type: "Post",  
-					url: "/login",  
+					type: "POST",  
+					url: "${pageContext.request.contextPath}/login/getMsg",    
 					dataType: 'text', 
 					cache: false,
 					contentType: false,
 					processData: false, 
-					data: formData,
+					data: {userName:userName},  
 					success: function(data){
-						var response = JSON.parse(data); 
-						$(".loader-div").hide();
-
-						 if(response.status == true)
-						 {
-							//redirect page
-							//window.location.href = "<?php echo base_url(); ?>index.php/home/index";
-							alert("1");
-						 }
-						 else
-						 {
-							 $(".loader-div").hide(); // hide loader
-							 swal("", response.msg, "warning"); 
-							 alert("-1");
-						 }
+						alert(data); 
 					},
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						//alert(textStatus);
