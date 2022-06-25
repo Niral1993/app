@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public List<Customer> getCustomers() {
 		// TODO Auto-generated method stub
-		return customerDao.getCustomers();
+		return customerDao.getCustomers(); 
 	}
 
 }

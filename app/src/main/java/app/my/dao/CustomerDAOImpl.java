@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -24,10 +25,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		// TODO Auto-generated method stub
 		
 		Session session = sessionFactory.getCurrentSession();
+		
 		CriteriaBuilder cb = sessionFactory.getCriteriaBuilder();
 		CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
 		Root<Customer> root = cq.from(Customer.class);
-		cq.select(root);
 		Query query = session.createQuery(cq);
 		
 		return query.getResultList();

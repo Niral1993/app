@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<%@ page isELIgnored="false" %>
-		
+		 
 		<!-- font css --> 
 		<link href="<c:url value="/resources/app/font/all.min.css" />" rel="stylesheet">
 		
@@ -27,10 +27,10 @@
 		<!-- my - css-->
 		<link href="<c:url value="/resources/css/custom.css" />" rel="stylesheet"> 
 		
-		
 	</head>
-	<body background="<c:url value="/resources/img/banner_4.jpg" />" style="height:50%;background-position: 50% 50%;background-repeat: no-repeat;background-size: cover; overflow: hidden;" >
-		
+	<!--  <body background="<c:url value="/resources/img/banner_4.jpg" />" style="height:50%;background-position: 50% 50%;background-repeat: no-repeat;background-size: cover; overflow: hidden;" >-->
+	<body background="${pageContext.request.contextPath}/resources/img/banner_4.jpg" style="height:50%;background-position: 50% 50%;background-repeat: no-repeat;background-size: cover; overflow: hidden;" >
+	
 		<div class="container">
 			
 			<!-- loader image -->
@@ -139,6 +139,9 @@
 				formData.append('userName', userName);
 				formData.append('password', password);
 				
+				var data = {}
+				data["userName"] = userName;
+				data["password"] = password;
 				/*$.ajax({
 					
 					type: "GET",
@@ -148,21 +151,48 @@
 					}
 				});
 				data: formData,
-				*/
-				
-				//
+				*/ 
+				 
+				//   
 				 
 				$.ajax({  
 					type: "POST",  
-					url: "${pageContext.request.contextPath}/login/getMsg",    
-					dataType: 'text', 
-					cache: false,
-					contentType: false,
-					processData: false, 
-					data: {userName:userName},  
+					url: "${pageContext.request.contextPath}/login/checkLogin",    
+					dataType: 'json',
+					contentType: "application/json",
+					data: JSON.stringify(data),  
 					success: function(data){
-						alert(data); 
-					},
+						
+						//alert(JSON.stringify(data));
+						
+						//var res = JSON.parse(data);  -- data is alredy in json format
+						
+						//alert(data.status);  
+						
+						//alert(data.user.userType);
+						
+						if(data.user.userId != 0)
+						{
+							//success
+							window.location.href = "${pageContext.request.contextPath}/home/homePage";  
+						}
+						else
+						{
+							//faild
+							swal({
+								title: "",
+								text: "Invalid username and password.",
+								showConfirmButton: true
+							}, function(){
+								//for focus
+								setTimeout(function(){
+									$('#txtPassword').focus();
+								});
+								validationFlag = 0;		
+							});
+							
+						}
+					}, 
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						//alert(textStatus);
 						$(".loader-div").hide(); 
